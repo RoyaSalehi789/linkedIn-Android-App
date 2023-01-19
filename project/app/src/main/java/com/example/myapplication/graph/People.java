@@ -35,4 +35,12 @@ public class People {
             person.updateConnections(idToPeople);
         }
     }
+
+    public Person getPerson(int id) {
+        return idToPeople.get(id);
+    }
+
+    public ArrayList<Person> getPeople() {
+        return people;
+    }
 }

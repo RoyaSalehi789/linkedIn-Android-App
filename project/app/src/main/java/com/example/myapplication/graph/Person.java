@@ -21,6 +21,42 @@ public class Person {
     ArrayList<Integer> connectionIds;
     ArrayList<Person> connections;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getUniversityLocation() {
+        return universityLocation;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public String getWorkplace() {
+        return workplace;
+    }
+
+    public ArrayList<String> getSpecialties() {
+        return specialties;
+    }
+
+    public ArrayList<Integer> getConnectionIds() {
+        return connectionIds;
+    }
+
+    public ArrayList<Person> getConnections() {
+        return connections;
+    }
+
     public Person(JSONObject jsonObject) throws JSONException {
         id = jsonObject.getInt("id");
         name = jsonObject.getString("name");
