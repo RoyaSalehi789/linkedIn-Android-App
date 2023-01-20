@@ -1,5 +1,7 @@
 package com.example.myapplication.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +12,22 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.HomeActivity;
+import com.example.myapplication.MainActivity;
+import com.example.myapplication.ProfileActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.graph.GlobalInfo;
 import com.example.myapplication.graph.Person;
 
 import java.util.ArrayList;
 
 public class RecommendationAdapter extends RecyclerView.Adapter<RecommendationAdapter.ViewHolder> {
     private ArrayList<Pair<Person, Integer>> peopleList;
+    Context context;
 
-    public RecommendationAdapter(ArrayList<Pair<Person, Integer>> peopleList) {
+    public RecommendationAdapter(ArrayList<Pair<Person, Integer>> peopleList, Context context) {
         this.peopleList = peopleList;
+        this.context = context;
     }
 
     @NonNull
@@ -40,7 +48,9 @@ public class RecommendationAdapter extends RecyclerView.Adapter<RecommendationAd
         holder.item_poster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                GlobalInfo.setOther(person);
+                Intent switchActivity = new Intent(context, ProfileActivity.class);
+                context.startActivity(switchActivity);
             }
         });
     }

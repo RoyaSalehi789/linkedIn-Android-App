@@ -20,6 +20,10 @@ public class People {
     ArrayList<Person> people;
     Map<Integer, Person> idToPeople = new HashMap<>();
 
+    public Map<Integer, Person> getIdToPeople() {
+        return idToPeople;
+    }
+
     public People(String text) throws JSONException {
 
         people = new ArrayList<>();
@@ -29,6 +33,7 @@ public class People {
             Person person = new Person(jsonArray.getJSONObject(i));
             idToPeople.put(person.id, person);
             people.add(person);
+
         }
 
         for (Person person : people) {

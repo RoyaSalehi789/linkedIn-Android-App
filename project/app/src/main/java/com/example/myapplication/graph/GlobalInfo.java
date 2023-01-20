@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 public class GlobalInfo {
     static People people;
     static Person me = null;
+    static Person other;
 
     public static People getPeople(Context context) throws JSONException, IOException {
         if (people == null) {
@@ -35,5 +36,11 @@ public class GlobalInfo {
 
     public static Person getMe() {
         return me;
+    }
+
+    public static  Person getOther() { return other;}
+
+    public static void setOther(Person other) {
+        GlobalInfo.other = other;
     }
 }

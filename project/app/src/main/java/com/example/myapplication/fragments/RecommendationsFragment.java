@@ -31,14 +31,22 @@ public class RecommendationsFragment extends Fragment {
         binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
 
         ArrayList<Pair<Person, Integer>> recommendations = new ArrayList<>();
-        for (int i = 0; i < GlobalInfo.getMe().getRecommendation().size(); i++) {
-            if (GlobalInfo.getMe().getRecommendation().get(i).second != 1 &&
-                    GlobalInfo.getMe().getRecommendation().get(i).first.getId() != GlobalInfo.getMe().getId()) {
-               recommendations.add(GlobalInfo.getMe().getRecommendation().get(i));
-               if (recommendations.size() == 20) break;
+        ArrayList<Pair<Person, Integer>> temp = null;
+        try {
+            temp = GlobalInfo.getMe().getRecommendation(GlobalInfo.getPeople(requireContext()));
+            for (int i = 0; i < temp.size(); i++) {
+                if (temp.get(i).second != 1 &&
+                        temp.get(i).first.getId() != GlobalInfo.getMe().getId()) {
+                   recommendations.add(temp.get(i));
+                   if (recommendations.size() == 20) break;
+                }
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        RecommendationAdapter recommendationAdapter = new RecommendationAdapter(recommendations);
+        RecommendationAdapter recommendationAdapter = new RecommendationAdapter(recommendations, requireContext());
         binding.recommendationRecyclerView.setHasFixedSize(true);
         binding.recommendationRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recommendationRecyclerView.setAdapter(recommendationAdapter);

@@ -17,6 +17,7 @@ public class Person {
     String universityLocation;
     String field;
     String workplace;
+    String email;
     ArrayList<String > specialties;
     ArrayList<Integer> connectionIds;
     ArrayList<Person> connections;
@@ -64,6 +65,7 @@ public class Person {
         universityLocation = jsonObject.getString("universityLocation");
         field = jsonObject.getString("field");
         workplace = jsonObject.getString("workplace");
+        email = jsonObject.getString("email");
 
         JSONArray jsonArray = jsonObject.getJSONArray("specialties");
         specialties = new ArrayList<>();
@@ -88,7 +90,7 @@ public class Person {
         }
     }
 
-    public ArrayList<Pair<Person, Integer>> getConnectionsWithLevel(int maxLevel) {
+    public ArrayList<Pair<Person, Integer>> getConnectionsWithLevel(int maxLevel, People people) {
         HashSet<Person> visited = new HashSet<>();
         ArrayList<Pair<Person, Integer>> result = new ArrayList<>();
         for (Person person : connections) {
@@ -106,6 +108,14 @@ public class Person {
                 if (!visited.contains(otherPerson)) {
                     visited.add(otherPerson);
                     result.add(new Pair<>(otherPerson, level));
+                }
+            }
+        }
+
+        if (people != null) {
+            for (Person person : people.getPeople()) {
+                if (!visited.contains(person)) {
+                    result.add(new Pair<>(person, maxLevel + 2));
                 }
             }
         }
@@ -144,8 +154,8 @@ public class Person {
         return score;
     }
 
-    public ArrayList<Pair<Person, Integer>> getRecommendation() {
-        ArrayList<Pair<Person, Integer>> result = getConnectionsWithLevel(5);
+    public ArrayList<Pair<Person, Integer>> getRecommendation(People people) {
+        ArrayList<Pair<Person, Integer>> result = getConnectionsWithLevel(5, people);
         result.sort(new Comparator<Pair<Person, Integer>>() {
             @Override
             public int compare(Pair<Person, Integer> o1, Pair<Person, Integer> o2) {

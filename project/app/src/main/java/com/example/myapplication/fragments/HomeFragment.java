@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.myapplication.ProfileActivity;
 import com.example.myapplication.adapter.PeopleAdapter;
 import com.example.myapplication.databinding.FragmentHomeBinding;
 import com.example.myapplication.graph.GlobalInfo;
@@ -29,7 +31,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
         try {
-            PeopleAdapter peopleAdapter = new PeopleAdapter(GlobalInfo.getPeople(requireContext()).getPeople());
+            PeopleAdapter peopleAdapter = new PeopleAdapter(GlobalInfo.getPeople(requireContext()).getPeople(), requireContext());
             binding.recyclerView.setHasFixedSize(true);
             binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
             binding.recyclerView.setAdapter(peopleAdapter);
@@ -52,6 +54,14 @@ public class HomeFragment extends Fragment {
                         binding.recyclerView.setVisibility(View.GONE);
                         binding.resultName.setText(person.getName());
                         binding.resultId.setText(String.valueOf(person.getId()));
+                        binding.result.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                GlobalInfo.setOther(person);
+                                Intent switchActivity = new Intent(requireContext(), ProfileActivity.class);
+                                startActivity(switchActivity);
+                            }
+                        });
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
