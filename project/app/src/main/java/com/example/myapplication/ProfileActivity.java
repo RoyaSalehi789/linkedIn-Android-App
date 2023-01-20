@@ -45,6 +45,9 @@ public class ProfileActivity extends AppCompatActivity {
         binding.connectionsRecycler2.setAdapter(connectionsAdapter);
 
         for (int i = 0; i < GlobalInfo.getMe().getConnectionIds().size(); i++) {
+            if (GlobalInfo.getMe().getId() == GlobalInfo.getOther().getId()) {
+                binding.connect.setVisibility(View.INVISIBLE);
+            }
             if (GlobalInfo.getMe().getConnectionIds().get(i) == GlobalInfo.getOther().getId()) {
                 binding.connect.setText("Disconnect");
                 break;

@@ -33,6 +33,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="TextView"
+        android:textColor="#3F51B5"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +46,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
+        android:textColor="#3F51B5"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date2" />
@@ -56,6 +58,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Specialties"
+        android:textColor="#3F51B5"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +71,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
+        android:textColor="#3F51B5"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/field2" />
@@ -79,9 +83,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
+        android:textColor="#3F51B5"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name2"
-        android:textSize="16sp" />
+        app:layout_constraintTop_toBottomOf="@+id/name2" />
 
     <TextView
         android:id="@+id/date2"
@@ -90,6 +95,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
+        android:textColor="#3F51B5"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id2" />
@@ -101,6 +107,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
+        android:textColor="#3F51B5"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/university2" />
@@ -112,6 +119,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Connections"
+        android:textColor="#3F51B5"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
