@@ -29,7 +29,7 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
 
         binding.dateOfBirth1.setText(GlobalInfo.getMe().getDateOfBirth());
-        //binding.field1.setText(GlobalInfo.getMe().getField());
+        binding.field1.setText(GlobalInfo.getMe().getField());
         binding.id1.setText(String.valueOf(GlobalInfo.getMe().getId()));
         binding.name1.setText(GlobalInfo.getMe().getName());
         binding.university1.setText(GlobalInfo.getMe().getUniversityLocation());

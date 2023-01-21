@@ -9,8 +9,10 @@ import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class GlobalInfo {
+    static ArrayList<String> specialities = new ArrayList<>();
     static People people;
     static Person me = null;
     static Person other;
@@ -28,6 +30,10 @@ public class GlobalInfo {
             people = new People(sb.toString());
         }
         return people;
+    }
+
+    public static ArrayList<String> getSpecialities() {
+        return specialities;
     }
 
     public static void setMe(Person me) {

@@ -49,5 +49,13 @@ public class MainActivity extends AppCompatActivity {
                  }
              }
          });
+
+        binding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent switchActivity = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(switchActivity);
+            }
+        });
     }
 }

@@ -14,11 +14,16 @@ public class Person {
     int id;
     String name;
     String dateOfBirth;
+    int dateOfBirthScore;
     String universityLocation;
+    int universityLocationScore;
     String field;
+    int fieldScore;
     String workplace;
+    int workplaceScore;
     String email;
     ArrayList<String > specialties;
+    int specialtiesScore;
     ArrayList<Integer> connectionIds;
     ArrayList<Person> connections;
 
@@ -58,6 +63,69 @@ public class Person {
         return connections;
     }
 
+    public int getDateOfBirthScore() {
+        return dateOfBirthScore;
+    }
+
+    public void setDateOfBirthScore(int dateOfBirthScore) {
+        this.dateOfBirthScore = dateOfBirthScore;
+    }
+
+    public int getUniversityLocationScore() {
+        return universityLocationScore;
+    }
+
+    public void setUniversityLocationScore(int universityLocationScore) {
+        this.universityLocationScore = universityLocationScore;
+    }
+
+    public int getFieldScore() {
+        return fieldScore;
+    }
+
+    public void setFieldScore(int fieldScore) {
+        this.fieldScore = fieldScore;
+    }
+
+    public int getWorkplaceScore() {
+        return workplaceScore;
+    }
+
+    public void setWorkplaceScore(int workplaceScore) {
+        this.workplaceScore = workplaceScore;
+    }
+
+    public int getSpecialtiesScore() {
+        return specialtiesScore;
+    }
+
+    public void setSpecialtiesScore(int specialtiesScore) {
+        this.specialtiesScore = specialtiesScore;
+    }
+
+    public Person(int id, String name, String dateOfBirth, String universityLocation,
+                  String field, String workplace, String email, ArrayList<String > specialties,
+                  ArrayList<Integer> connectionIds, int dateOfBirthScore, int universityLocationScore,
+                    int fieldScore, int workplaceScore, int specialtiesScore) {
+        this.dateOfBirthScore = dateOfBirthScore;
+        this.universityLocationScore = universityLocationScore;
+        this.fieldScore = fieldScore;
+        this.workplaceScore = workplaceScore;
+        this.specialtiesScore = specialtiesScore;
+
+        this.id = id;
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.universityLocation = universityLocation;
+        this.field = field;
+        this.workplace = workplace;
+        this.email = email;
+        this.specialties = specialties;
+        this.connectionIds = connectionIds;
+
+        connections = new ArrayList<>();
+    }
+
     public Person(JSONObject jsonObject) throws JSONException {
         id = jsonObject.getInt("id");
         name = jsonObject.getString("name");
@@ -66,6 +134,12 @@ public class Person {
         field = jsonObject.getString("field");
         workplace = jsonObject.getString("workplace");
         email = jsonObject.getString("email");
+
+        dateOfBirthScore = 1;
+        universityLocationScore = 10;
+        fieldScore = 10;
+        workplaceScore = 10;
+        specialtiesScore = 20;
 
         JSONArray jsonArray = jsonObject.getJSONArray("specialties");
         specialties = new ArrayList<>();
@@ -123,28 +197,29 @@ public class Person {
         return result;
     }
 
-    public Integer scoreRecommendation(Pair<Person, Integer> person) {
+    public Integer scoreRecommendation(Pair<Person, Integer> person, int dateOfBirthScore, int universityLocationScore,
+                                       int fieldScore, int workplaceScore, int specialtiesScore) {
         int score = 0;
         if (dateOfBirth.equals(person.first.dateOfBirth)) {
-            score += 1;
+            score += dateOfBirthScore;
         }
 
         if (universityLocation.equals(person.first.universityLocation)) {
-            score += 10;
+            score += universityLocationScore;
         }
 
         if (field.equals(person.first.field)) {
-            score += 10;
+            score += fieldScore;
         }
 
         if (workplace.equals(person.first.workplace)) {
-            score += 10;
+            score += workplaceScore;
         }
 
         for (int i = 0; i < specialties.size(); i++) {
             for (int j = 0; j < person.first.specialties.size(); j++) {
                 if (specialties.get(i).equals(person.first.specialties.get(j))) {
-                    score += 20;
+                    score += specialtiesScore;
                 }
             }
         }
@@ -159,7 +234,10 @@ public class Person {
         result.sort(new Comparator<Pair<Person, Integer>>() {
             @Override
             public int compare(Pair<Person, Integer> o1, Pair<Person, Integer> o2) {
-                return scoreRecommendation(o2).compareTo(scoreRecommendation(o1));
+                return scoreRecommendation(o2, o2.first.dateOfBirthScore, o2.first.universityLocationScore,
+                        o2.first.fieldScore, o2.first.workplaceScore, o2.first.specialtiesScore).compareTo(scoreRecommendation(o1,
+                        o1.first.dateOfBirthScore, o1.first.universityLocationScore,
+                        o1.first.fieldScore, o1.first.workplaceScore, o1.first.specialtiesScore));
             }
         });
         return result;
